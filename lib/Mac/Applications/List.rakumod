@@ -4,6 +4,9 @@ unit module Mac::Applications::List;
 my @app_list;
 my @app_dirs = < /System/Applications /Applications >;
 
+# add home directory
+@app_dirs.push(%*ENV<HOME> ~ '/Applications');
+
 sub apps(@dirs = []) is export(:MANDATORY) {
     @app_dirs.push(@dirs) if @dirs;
     while @app_dirs {
