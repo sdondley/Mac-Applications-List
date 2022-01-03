@@ -1,7 +1,7 @@
 {
     "perl" : "6.d",
     "api" : "1",
-    "auth" : "github:sdondley",
+    "auth" : "zef:sdondley",
     "version" : "0.0.1",
     "description" : "List installed apps found in standard and other directories",
     "authors" : [ "Steve Dondley" ],
@@ -16,6 +16,6 @@
     "name" : "Mac::Applications::List",
     "source-url" : "https://github.com/sdondley/Mac-Applications-List",
     "provides" : {
-        "Mac::Applications::List" : "lib/Mac/Appllications/List.rakumod"
+        "Mac::Applications::List" : "lib/Mac/Applications/List.rakumod"
     }
 }
