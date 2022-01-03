@@ -2,7 +2,7 @@
     "perl" : "6.d",
     "api" : "1",
     "auth" : "zef:sdondley",
-    "version" : "0.0.2",
+    "version" : "0.0.3",
     "description" : "List installed apps found in standard and other directories",
     "authors" : [ "Steve Dondley" ],
     "license" : "Artistic-2.0",
