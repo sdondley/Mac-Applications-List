@@ -44,5 +44,5 @@ Steve Dondley
 
 ## Copyright and License
 
-©2022 – Cosmic heat death under the (Artistic License, v2.0)[https://opensource.org/licenses/Artistic-2.0]
+©2022 – Cosmic heat death under the [Artistic License, v2.0](https://opensource.org/licenses/Artistic-2.0)
 
