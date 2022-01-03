@@ -19,12 +19,12 @@ my @apps = apps [ '/paths/to/a/directory', '/and/another/directory' >;
 This module provides a single function, `apps`, which takes an optional array as
 an argument. The function is automatically exported.
 
-This function searches for apps contained in the `/System/Applications` and
-`/Applications` folders as well as any subfolders within any of the paths passed
-to the function.
+This function searches for apps in the `/System/Applications`, `/Applications`,
+`~/Applications` directories and their subdirectories as well as the the
+directories and subdirectories of the directory paths passed to the function.
 
-The optional array argument to the `apps` functions should be a list of string
-representing paths to additional directories that will be searched for
+The optional array argument to the `apps` functions should be an array of
+strings representing paths to additional directories that will be searched for
 applications.
 
 ## Functions
