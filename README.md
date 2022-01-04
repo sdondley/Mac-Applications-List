@@ -1,7 +1,7 @@
 # Mac::Applications::List
 
-This module lists applications installed in the standard locations on macOS plus
-any other directories passed to the to `apps()` function.
+This module find and returns a list of applications in the standard locations
+on macOS plus other directories passed to the to `apps()` function.
 
 ## Synopsis
 
@@ -19,15 +19,15 @@ of strings or single string argument. The function is automatically exported.
 
 This function searches for apps in the `/System/Applications`, `/Applications`,
 `~/Applications` directories and their subdirectories as well as the
-directories and subdirectories of directory paths passed to the function.
+directories and subdirectories of the directory paths passed to the function.
 
 The optional argument to the `apps` is a string or array of strings
 representing paths to additional directories to be searched for applications.
 
 ## Functions
 
-`apps( $dirs = [] )`
-`apps( Str $dir )`
+### multi apps( $dirs = [] )
+### multi apps( Str $dir )
 
 Generates and returns unique array of application names found in standard
 application installation directories on macOS. A string or array of strings of
