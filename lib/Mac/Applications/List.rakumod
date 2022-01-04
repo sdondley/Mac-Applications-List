@@ -7,9 +7,11 @@ my @app_dirs = < /System/Applications /Applications >;
 # add home directory
 @app_dirs.push(%*ENV<HOME> ~ '/Applications');
 
-sub apps(@dirs = []) is export(:MANDATORY) {
-    @app_dirs.push(@dirs) if @dirs;
-    while @app_dirs {
+#TODO: get real name of localized apps
+multi apps(Str $dir) is export(:MANDATORY) { apps [$dir] }
+multi apps(@dirs?) is export(:MANDATORY) {
+    @app_dirs.append(@dirs) if @dirs;
+    while @app_dirs.unique {
         for @app_dirs.pop.IO -> $dir {
             if !$dir.IO.d {
                 warn "$dir is not a directory";
