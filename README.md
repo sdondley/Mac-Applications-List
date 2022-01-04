@@ -9,7 +9,7 @@ on macOS plus other directories passed to the to `apps()` function.
 use Mac::Applications::List;
 my @apps = apps;
 my @apps = apps '/some/path';
-my @apps = apps [ '/paths/to/a/directory', '/and/another/directory' ];
+my @apps = apps [ '/path/to/dir1', '/path/to/dir2' ];
 ```
 
 ## Description
@@ -35,6 +35,9 @@ paths to other directories can be included to search additional directories.
 
 Returns an array of strings of the names of the applications found. The strings
 do not included the path to the applications, just the application name.
+
+If the directory does not exist, a warning will be thrown. The function will
+still return a list of applications found in other direcgtories.
 
 ## Author
 
