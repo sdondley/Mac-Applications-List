@@ -1,7 +1,7 @@
 # Mac::Applications::List
 
-This module find and returns a list of applications in the standard locations
-on macOS plus other directories passed to the to `apps()` function.
+This module finds and returns a list of applications in the standard locations
+on macOS and other directories passed to the to `apps()` function.
 
 ## Synopsis
 
@@ -14,10 +14,11 @@ my @apps = apps [ '/path/to/dir1', '/path/to/dir2' ];
 
 ## Description
 
-This module provides a single function, `apps`, which takes an optional array
-of strings or single string argument. The function is automatically exported.
+This module provides a single function, `apps`, which takes an optional
+argument of an array of strings or a string scalar. The function is
+automatically exported.
 
-This function searches for apps in the `/System/Applications`, `/Applications`,
+The module searches `/System/Applications`, `/Applications`, and
 `~/Applications` directories and their subdirectories as well as the
 directories and subdirectories of the directory paths passed to the function.
 
@@ -34,10 +35,10 @@ application installation directories on macOS. A string or array of strings of
 paths to other directories can be included to search additional directories.
 
 Returns an array of strings of the names of the applications found. The strings
-do not included the path to the applications, just the application name.
+do not include the path to the applications, just the application name.
 
-If the directory does not exist, a warning will be thrown. The function will
-still return a list of applications found in other direcgtories.
+If the directory does not exist, the module generates a warning. The function
+will still return a list of applications found in other direcgtories.
 
 ## Author
 
