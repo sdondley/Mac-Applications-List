@@ -8,8 +8,7 @@ my @app_dirs = < /System/Applications /Applications >;
 @app_dirs.push(%*ENV<HOME> ~ '/Applications');
 
 #TODO: get real name of localized apps
-multi apps(Str $dir) is export(:MANDATORY) { apps [$dir] }
-multi apps(@dirs?) is export(:MANDATORY) {
+sub apps(*@dirs where .all ~~ Str:D) is export(:MANDATORY) {
     @app_dirs.append(@dirs) if @dirs;
     while @app_dirs.unique {
         for @app_dirs.pop.IO -> $dir {
