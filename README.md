@@ -9,7 +9,7 @@ on macOS and other directories passed to the to `apps()` function.
 use Mac::Applications::List;
 my @apps = apps;
 my @apps = apps '/some/path';
-my @apps = apps [ '/path/to/dir1', '/path/to/dir2' ];
+my @apps = apps < /path/to/dir1 /path/to/dir2 >;
 ```
 
 ## Description
