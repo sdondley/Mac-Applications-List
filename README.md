@@ -27,8 +27,8 @@ representing paths to additional directories to be searched for applications.
 
 ## Functions
 
-### multi apps( $dirs = [] )
-### multi apps( Str $dir )
+### sub apps( [  < dir1 dir2 ... >  ] )
+### sub apps( [  'dir'  ] )
 
 Generates and returns unique array of application names found in standard
 application installation directories on macOS. A string or array of strings of
