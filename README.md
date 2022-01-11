@@ -40,8 +40,10 @@ do not include the path to the applications, just the application name.
 If the directory does not exist, the module generates a warning. The function
 will still return a list of applications found in other direcgtories.
 
-## Author
+## Bugs and Limitations
+This app will not find apps that have been "localized," i.e. apps contained in a diectory with a ".localized" extension. A future release will address this issue.
 
+## Author
 Steve Dondley
 
 ## Copyright and License
