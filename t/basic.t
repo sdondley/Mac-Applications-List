@@ -2,7 +2,7 @@ use Test;
 use lib 'lib';
 use Mac::Applications::List;
 
-plan 5;
+plan 6;
 
 # check OS
 is 'darwin', VM.osname(), 'running macOS';
@@ -16,6 +16,10 @@ is ('Safari' ~~ any @apps), True, 'finds Safari';
 my @path = < /Applications >;
 @apps = apps @path;
 is @apps.Bool, True, 'returns a list of apps';
+
+@apps = apps < /Applications >;
+is @apps.Bool, True, 'returns a list with list argument';
+
 
 @apps = apps '/Applications';
 is @apps.Bool, True, 'returns a list of apps';
