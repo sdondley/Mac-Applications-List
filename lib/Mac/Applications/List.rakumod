@@ -28,5 +28,6 @@ sub apps(*@dirs where .all ~~ Str:D) is export(:MANDATORY) {
             }
         }
     }
+    @app_list.push('Finder');
     return @app_list.unique;
 }
