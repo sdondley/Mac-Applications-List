@@ -1,7 +1,5 @@
-# Mac::Applications::List
-
-This module finds and returns a list of applications in the standard locations
-on macOS and other directories passed to the to `apps()` function.
+## Name
+Mac::Applications::List - get a list of applications on your macOS machine
 
 ## Synopsis
 
@@ -13,8 +11,12 @@ my @apps = apps < /path/to/dir1 /path/to/dir2 >;
 ```
 
 ## Description
+This module finds and returns a list of applications in the standard locations
+on macOS. Since applications can be located anywhere and it's not practical to
+search the entire drive, additional directories can be passed to the to
+`apps()` function.
 
-This module provides a single function, `apps`, which takes an optional
+The module provides a single function, `apps`, which takes an optional
 argument of an array of strings or a string scalar. The function is
 automatically exported.
 
