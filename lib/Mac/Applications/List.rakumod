@@ -5,19 +5,26 @@ class MacAppList is export(:MANDATORY) {
     has @.app_list;
     has @!app_dirs;
 
-    submethod BUILD() {
+    submethod BUILD(Str:D @init_dirs?) {
       # prime directory list with common dirs to look for apps
       @!app_dirs = '/System/Applications',
                    '/Applications',
                    %*ENV<HOME> ~ '/Applications';
+      push @!app_dirs, @init_dirs if @init_dirs;
       @!app_dirs = grep { .IO.d }, @!app_dirs;
     }
 
+    method new(*@init_dirs) {
+        self.bless(init_dirs => @init_dirs);
+    }
+
     method exists(Str:D $app) {
+        self.find_apps if !@!app_list;
         return $app ~~ any @!app_list 
     }
 
     method print() {
+        self.find_apps if !@!app_list;
         put @!app_list.sort.join(", ");
     }
 
