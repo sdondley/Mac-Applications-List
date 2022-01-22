@@ -3,7 +3,7 @@ use Test;
 use lib 'lib';
 use Mac::Applications::List;
 
-plan 9;
+plan 10;
 # check OS
 is 'darwin', VM.osname(), 'running macOS';
 
@@ -32,5 +32,8 @@ is @apps.Bool, True, 'returns a list with list argument';
 
 @apps = MacAppList.new.find_apps('/Applications');
 is @apps.Bool, True, 'returns a list of apps';
+
+
+is True, MacAppList.new.exists('Safari'), 'exists method works';
 
 done-testing;
