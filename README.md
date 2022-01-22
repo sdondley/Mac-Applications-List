@@ -81,6 +81,27 @@ Prints out a aplphabetical list of apps to the command line
 ### app_list()
 Returns an array of apps.
 
+## INSTALLATION
+
+Assuming Raku and zef is already installed, install the module with:
+
+`zef install Mac::Applications::List`
+
+If you don't have Raku with zef installed yet, it's easiest to install them both with homebrew if you already have brew installed:
+
+`brew install rakudo-star`
+
+If you don't have brew installed, install it with:
+
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+Note, however, that the homebrew install may be months out of date.
+
+To ensure you get the absolute latest version of Raku, [see this
+page](https://course.raku.org/essentials/how-to-install-rakudo/) for other
+installation options. Whatever method you choose to install Raku, just be sure
+the `zef` command gets installed and is working on your machine as well.
+
 ## Bugs and Limitations
 This app will not find apps that have been "localized," i.e. apps contained in
 a diectory with a ".localized" extension. A future release will address this
