@@ -61,12 +61,16 @@ will still return a list of applications found in other direcgtories.
 
 ## Methods
 
-### new()
-Creates a new MacAppList object
+### new( [  < dir1 dir2 ... > ] )
+### new( [ 'dir' ] )
+Creates a new MacAppList object, optionally initialized with directories to
+search which will be searched in addition to standard app directory locations.
 
 ### find_apps( [  < dir1 dir2 ... >  ] )
 ### find_apps( [  'dir'  ]  )
-Searches for new apps. Returns an array of apps.
+Searches for new apps in standard locations, plus any directories the object
+was initialized with plus any optional directories provided. Returns an array
+of apps.
 
 ### exists( Str )
 Determines if an app exists. Returns boolean.
@@ -78,7 +82,9 @@ Prints out a aplphabetical list of apps to the command line
 Returns an array of apps.
 
 ## Bugs and Limitations
-This app will not find apps that have been "localized," i.e. apps contained in a diectory with a ".localized" extension. A future release will address this issue.
+This app will not find apps that have been "localized," i.e. apps contained in
+a diectory with a ".localized" extension. A future release will address this
+issue.
 
 ## Author
 Steve Dondley
