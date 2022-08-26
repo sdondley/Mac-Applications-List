@@ -2,38 +2,46 @@ use v6;
 unit module Mac::Applications::List;
 
 class MacAppList is export(:MANDATORY) {
-    has @.app_list;
-    has @!app_dirs;
+    has @.app-path-list;
+    has @.app-list;
+    has @!app-dirs;
 
-    submethod BUILD(Str:D @init_dirs?) {
+    submethod BUILD(Str:D @init-dirs?) {
       # prime directory list with common dirs to look for apps
-      @!app_dirs = '/System/Applications',
+      @!app-dirs = '/System/Applications',
                    '/Applications',
                    %*ENV<HOME> ~ '/Applications';
-      push @!app_dirs, @init_dirs if @init_dirs;
-      @!app_dirs = grep { .IO.d }, @!app_dirs;
+      push @!app-dirs, @init-dirs if @init-dirs;
+      @!app-dirs = grep { .IO.d }, @!app-dirs;
+      self!find_apps;
     }
 
-    method new(*@init_dirs) {
-        self.bless(init_dirs => @init_dirs);
+    method app-list {
+        return @!app-list.sort.unique.List;
+    }
+
+    method app-path-list {
+        return @!app-path-list.sort.unique.List;
+    }
+
+    method new(*@init-dirs) {
+        self.bless(init-dirs => @init-dirs);
     }
 
     method exists(Str:D $app) {
-        self.find_apps if !@!app_list;
-        return $app ~~ any @!app_list 
+        return $app ~~ any @!app-list;
     }
 
     method print() {
-        self.find_apps if !@!app_list;
-        put @!app_list.sort.join(", ");
+        put @!app-list.sort.join(", ");
     }
 
-    #TODO: get real name of localized apps
-    method find_apps(*@dirs where .all ~~ Str:D) {
-        @!app_dirs.append(@dirs) if @dirs;
-        @!app_dirs = @!app_dirs.unique;
-        while @!app_dirs {
-            for @!app_dirs.pop.IO -> $dir {
+    # TODO: get real name of localized apps
+    method !find_apps(*@dirs where .all ~~ Str:D,) {
+        @!app-dirs.append(@dirs) if @dirs;
+        @!app-dirs = @!app-dirs.unique;
+        while @!app-dirs {
+            for @!app-dirs.pop.IO -> $dir {
                 if !$dir.IO.d {
                     warn "$dir is not a directory";
                     next;
@@ -42,20 +50,21 @@ class MacAppList is export(:MANDATORY) {
                     if $file.extension eq 'app' {
                         my $macOS_dir = $file.Str ~ '/Contents/MacOS';
                         if $macOS_dir.IO.d {
-                            @!app_list.push($file.extension('').basename);
+                            @!app-path-list.push($file.Str);
+                            @!app-list.push($file.extension('').basename);
                         }
                     } else {
-                        @!app_dirs.push($file.Str);
+                        @!app-dirs.push($file.Str);
                     }
                 }
             }
         }
-        @!app_list.push('Finder');
-        return @!app_list.unique;
+        return self;
     }
 }
 
-sub apps(|c) is export(:MANDATORY) {
-    return MacAppList.new.find_apps(|c);
+sub apps(*@c, Bool :$full-path;) is export(:MANDATORY) {
+    my $app-list = MacAppList.new(@c);
+    return $full-path ?? $app-list.app-path-list !! $app-list.app-list;
 }
 

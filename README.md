@@ -1,85 +1,93 @@
 ## Name
+
 Mac::Applications::List - get a list of applications on your macOS machine
 
 ## Synopsis
 
 ### Functional programming style:
+
 ```
 use Mac::Applications::List;
 my @apps = apps;
 my @apps = apps '/some/path';
 my @apps = apps < /path/to/dir1 /path/to/dir2 >;
+say @apps;
 ```
 
 ### OO programming interface:
+
 ```
 use Mac::Applications::List;
 
-my $my_apps = MacAppList.new(); # create a MacAppList object
-$my_apps.apps('/some/dir');     # populate object
-$my_apps.exists('Safari');      # test to see if an app exists
-$my_apps.print;                 # print out a list of apps
-$my_apps.list;                  # return an array of apps
-
+my $my_apps = MacAppList.new();    # create a MacAppList object
+$my_apps.find_apps('/some/dir');   # populate object
+$my_apps.exists('Safari');         # test to see if an app exists
+$my_apps.print;                    # print out a list of apps
+$my_apps.list;                     # return an array of apps
 ```
 
 ## Description
-This module finds and generates a list of applications in the standard locations
-on macOS. Since applications can be located anywhere and it's not practical to
-search the entire drive, additional directories can be passed to the to
-`apps()` function or method.
 
-In the simplest usage, the module provides a single function, `apps`, which
-takes an optional argument of an array of strings or a string scalar. The
-function is automatically exported.
+This module finds and generates a list of applications found in the standard locations
+on macOS.
+
+In the simplest usage, an automatically exported function, `apps`, returns
+a List of the apps found.
 
 An OO interface is also provided which provides convenient methods for
 determining if an app exists, printing the list of apps, and returning the list
 of apps found.
 
-The module searches `/System/Applications`, `/Applications`, and
-`~/Applications` directories and their subdirectories as well as the
-directories and subdirectories of the directory paths passed to the function.
-
-The optional argument to `apps` is a string or array of strings representing
-paths to additional directories to be searched for applications.
+Be default, the module searches `/System/Applications`, `/Applications`, and
+`~/Applications` directories. Additional directories can be searched by passing string
+arguments, representing the paths of directories to be searched.
 
 ## Functions
 
-### sub apps( [  < dir1 dir2 ... >  ] )
-### sub apps( [  'dir'  ] )
+### sub apps( [  < dir1 dir2 ... >, Bool :$full-path = False  ] )
 
-Generates and returns unique array of application names found in standard
+### sub apps( [  'dir', Bool :$full-path = False ] )
+
+Returns a unique List of application names found in standard
 application installation directories on macOS. A string or array of strings of
 paths to other directories can be included to search additional directories.
 
-Returns an array of strings of the names of the applications found. The strings
-do not include the path to the applications, just the application name.
+Set the `:full-path` options to have paths to the apps included. Otherwise,
+the List contains only the names of the apps.
 
 If the directory does not exist, the module generates a warning. The function
-will still return a list of applications found in other direcgtories.
+will still return a list of applications found in other directories.
 
 ## Methods
 
 ### new( [  < dir1 dir2 ... > ] )
+
 ### new( [ 'dir' ] )
+
 Creates a new MacAppList object, optionally initialized with directories to
 search which will be searched in addition to standard app directory locations.
 
-### find_apps( [  < dir1 dir2 ... >  ] )
-### find_apps( [  'dir'  ]  )
-Searches for new apps in standard locations, plus any directories the object
-was initialized with plus any optional directories provided. Returns an array
-of apps.
+Initialization also initiates a search for new apps in standard locations,
+plus any directories the object was initialized with plus any optional directories
+provided.
+
+Returns the `<Mac::Applications::List>` object.
+
+### app-list()
+
+Returns an List of all apps names found.
+
+### app-path-list()
+
+Returns a List of all paths to the apps found.
 
 ### exists( Str )
-Determines if an app exists. Returns boolean.
+
+Determines if an app exists. Returns a boolean value.
 
 ### print()
-Prints out a aplphabetical list of apps to the command line
 
-### app_list()
-Returns an array of apps.
+Prints out a comma-separated, alphabetical listing of apps to the command line
 
 ## INSTALLATION
 
@@ -87,7 +95,8 @@ Assuming Raku and zef is already installed, install the module with:
 
 `zef install Mac::Applications::List`
 
-If you don't have Raku with zef installed yet, it's easiest to install them both with homebrew if you already have brew installed:
+If you don't have Raku with zef installed yet, it's easiest to install them both with homebrew if you already have brew
+installed:
 
 `brew install rakudo-star`
 
@@ -103,11 +112,13 @@ installation options. Whatever method you choose to install Raku, just be sure
 the `zef` command gets installed and is working on your machine as well.
 
 ## Bugs and Limitations
+
 This app will not find apps that have been "localized," i.e. apps contained in
-a diectory with a ".localized" extension. A future release will address this
+a directory with a ".localized" extension. A future release will address this
 issue.
 
 ## Author
+
 Steve Dondley
 
 ## Copyright and License

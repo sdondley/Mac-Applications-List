@@ -3,37 +3,42 @@ use Test;
 use lib 'lib';
 use Mac::Applications::List;
 
-plan 10;
+plan 12;
 # check OS
 is 'darwin', VM.osname(), 'running macOS';
 
+my $my_apps = MacAppList.new(); # create a MacAppList object
+
+my @apps = MacAppList.new.app-path-list;
+ok @apps[0] ~~ rx|^\/.*app$|, 'gets full paths to apps';
+
 # no arg
-my @apps = MacAppList.new.find_apps;
+@apps = MacAppList.new.app-list;
 is @apps.Bool, True, 'returns a list of apps';
 is ('Safari' ~~ any @apps), True, 'finds Safari';
 
-my $app_list = MacAppList.new();
-$app_list.find_apps;
-is True, $app_list.exists('Safari'), 'exists method works';
-
+my $app-list = MacAppList.new();
+is True, $app-list.exists('Safari'), 'exists method works';
 
 is apps.Bool, True, 'functional interface works';
 
 # with args
 my @path = < /Applications >;
-@apps = MacAppList.new.find_apps(@path);
+@apps = MacAppList.new(@path);
 is @apps.Bool, True, 'returns a list of apps';
 
 is apps(@path).Bool, True, 'returns a list of apps with functional interface';
 
-@apps = MacAppList.new.find_apps(< /Applications >);
+@apps = MacAppList.new(< /Applications >);
 is @apps.Bool, True, 'returns a list with list argument';
 
 
-@apps = MacAppList.new.find_apps('/Applications');
+@apps = MacAppList.new('/Applications');
 is @apps.Bool, True, 'returns a list of apps';
 
-
 is True, MacAppList.new.exists('Safari'), 'exists method works';
+
+my @apps2 = apps(:full-path);
+ok @apps2[0] ~~ rx|^\/.*app$|, 'gets full paths to apps';
 
 done-testing;
